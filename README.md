@@ -211,8 +211,15 @@ This directory stores all the images in this project.
 ### videos
 This directory stores all the videos in this project.
 
-### utils/cvfpscalc.py
-This is a module for FPS measurement.
+### utils/
+This directory contains multiple functions to clean the dataset, augment dataset, and evaluate the system.
+* First step of deleting polluted data (delete_polluted_data.py): screen the polluted data in the raw dataset into a txt file
+* Dataset cleaning (cleaningDataset.py): delete all the screened out data
+* Add augmented data points by rotating/translating/scaling the original dataset (utils/dataManipulation.py)
+* Mode changing detection (hand_gesture_mediapipe.py): detect the transition between static hand pose mode and dynamic hand gesture mode.
+* Add none-sense data points (utils/dataManipulation.py)
+* Randomly insert and/or append another data point before/after the current data point. (utils/dataManipulation.py)
+* Module for FPS measurement (cvfpscalc.py).
 
 
 
