@@ -13,7 +13,7 @@ from charset_normalizer import detect
 import cv2 as cv
 import numpy as np
 import mediapipe as mp
-import hand_gesture_mediapipe
+from utils import hand_gesture_mediapipe
 from utils import CvFpsCalc
 from model import KeyPointClassifier
 from model import PointHistoryClassifier
@@ -22,7 +22,10 @@ from model import PointHistoryClassifier
 NUM_OF_FRAMES_PER_PRED = 45 # number of frames to make a gesture prediction
 TEST_MODE = True # True: test model, False: collect data only
 COLLECT_DATA = True # True: store the prediction results, False: don't store (real application)
-DATA_FILENAME = "prediction_results.pkl" # The filename to store the prediction results (if COLLECT_DATA=True)
+'''
+This can be used in video dataset creation!
+'''
+DATA_FILENAME = "model/point_history_classifier/datasets/prediction_results.pkl" # The filename to store the prediction results and key points (if COLLECT_DATA=True)
 
 
 def get_args():
@@ -504,91 +507,6 @@ def draw_landmarks(image, landmark_point):
             cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
                       -1)
             cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-
-        # if index == 0:  # 手首1
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 1:  # 手首2
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 2:  # 親指：付け根
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 3:  # 親指：第1関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 4:  # 親指：指先
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (0, 0, 0), 1)
-        # if index == 5:  # 人差指：付け根
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 6:  # 人差指：第2関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 7:  # 人差指：第1関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 8:  # 人差指：指先
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (0, 0, 0), 1)
-        # if index == 9:  # 中指：付け根
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 10:  # 中指：第2関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 11:  # 中指：第1関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 12:  # 中指：指先
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (0, 0, 0), 1)
-        # if index == 13:  # 薬指：付け根
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 14:  # 薬指：第2関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 15:  # 薬指：第1関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 16:  # 薬指：指先
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (0, 0, 0), 1)
-        # if index == 17:  # 小指：付け根
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 18:  # 小指：第2関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 19:  # 小指：第1関節
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 5, (0, 0, 0), 1)
-        # if index == 20:  # 小指：指先
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (255, 255, 255),
-        #               -1)
-        #     cv.circle(image, (landmark[0], landmark[1]), 8, (0, 0, 0), 1)
 
     return image
 
