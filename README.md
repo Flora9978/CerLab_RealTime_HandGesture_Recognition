@@ -37,8 +37,6 @@
 <h3 align="center">First View RealTime HandGesture Recognition</h3>
 
   <p align="center">
-    project_description
-    <br />
     <a href="https://drive.google.com/file/d/10HER3nJzC9eRZMU7xMl89tGWWynFoSwv/view?usp=sharing">View Demo</a>
     ·
     <a href="https://github.com/Flora9978/CerLab_RealTime_HandGesture_Recognition/issues">Report Bug</a>
