@@ -133,7 +133,7 @@ python3 app.py
 
 Using a recorded video
 ```
-python3 app.py --video path-to-video
+python3 app.py --video <path-to-video>
 ```
 
 
