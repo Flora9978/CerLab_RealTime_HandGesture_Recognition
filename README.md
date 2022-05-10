@@ -18,12 +18,12 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 
 
@@ -31,7 +31,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Flora9978/CerLab_RealTime_HandGesture_Recognition">
-    <img src="images/CerLab_Logo.png" alt="Logo" width="80" height="80">
+    <img src="images/CerLab_Logo.png" alt="Logo" width="130" height="80">
   </a>
 
 <h3 align="center">First View RealTime HandGesture Recognition</h3>
@@ -39,21 +39,21 @@
   <p align="center">
     project_description
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Flora9978/CerLab_RealTime_HandGesture_Recognition"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://drive.google.com/file/d/10HER3nJzC9eRZMU7xMl89tGWWynFoSwv/view?usp=sharing">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/Flora9978/CerLab_RealTime_HandGesture_Recognition/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/Flora9978/CerLab_RealTime_HandGesture_Recognition/issues">Request Feature</a>
   </p>
 </div>
 
 
 
 <!-- TABLE OF CONTENTS -->
-<details>
+<!-- <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -76,139 +76,170 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
-</details>
+</details> -->
 
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+This is a project of real-time first-view hand gesture recognition. Both the static gestures (i.e. thumb up) and dynamic hand gestures (i.e. checkmark, clockwise) can be recognized. 
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+There are seven dynamic gestures. Dynamic gestures are defined as a gesture that requires multiple video frames to be classified: 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+* clockwise
+* counterclockwise
+* checkmark
+* cross
+* right
+* left
+* none (other than the above six)
 
+We show an example of the trajactories of the six dynamic gestures.
+![Examples of Supported Gestures](images/dynamic_gestures_traj.png)
 
+You can customize your own gestures.
 
-### Built With
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
+There are multiple static poses to be recognized. Static poses are different from dynamic gestures, because the classification task is conducted using one image. 
+* Number counting (1 - 9)
+* Thumb up & thumb down
+* Yeah
+* Gun
+* Point
+* ...
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
+This is an introduction of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Python 3 is needed. You are welcomed to install the latest python version.
 
-### Installation
+You need to install the following python libraries. 
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+```sh
+pip install tensorflow numpy mediapipe scikit-learn opencv-python pandas seaborn
+```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+### Optional
 
+We recommend you to install cuda to accelerate the training process. The version of the cuda and cudnn module should matches the tensorflow version you installed. 
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Using your camera
+```
+python3 app.py
+```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+Using a recorded video
+```
+python3 app.py --video path-to-video
+```
 
 
+# Directory
+```
+.
+├── README.md
+├── app.py
+├── conquer_cross_model.ipynb
+├── images
+│   └── ...
+├── keypoint_classification_EN.ipynb
+├── model
+│   ├── __init__.py
+│   ├── keypoint_classifier
+│   │   ├── keypoint.csv
+│   │   ├── keypoint_classifier.hdf5
+│   │   ├── keypoint_classifier.py
+│   │   ├── keypoint_classifier.tflite
+│   │   └── keypoint_classifier_label.csv
+│   ├── point_history_classifier
+│   │   ├── datasets
+│   │   │   ├── point_history.csv
+│   │   │   ├── point_history_classifier_label.csv
+│   │   │   ├── point_history_xinyang.csv
+│   │   │   └── prediction_results.pkl
+│   │   ├── point_history_classifier.py
+│   │   ├── point_history_classifier_LSTM_ConquerCross.tflite
+│   │   ├── point_history_classifier_LSTM_LR_random_10.tflite
+│   │   ├── point_history_classifier_LSTM_LR_random_18.tflite
+│   │   └── point_history_classifier_LSTM_LR_random_22.tflite
+│   └── test.txt
+├── utils
+│   ├── __init__.py
+│   ├── cleaningDataset.py
+│   ├── cvfpscalc.py
+│   ├── dataManipulation.py
+│   ├── delete_polluted_data.py
+│   └── hand_gesture_mediapipe.py
+└── videos
+    └── ...
+```
 
-<!-- CONTRIBUTING -->
-## Contributing
+## Description
+### app.py
+This is a sample program for inference.<br>
+In addition, learning data (key points) for hand sign recognition,<br>
+You can also collect training data (index finger coordinate history) for finger gesture recognition.
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+### keypoint_classification.ipynb
+This is a model training script for hand pose recognition.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+### conquer_cross_model.ipynb
+This is a model training script for hand gesture recognition.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### model/keypoint_classifier
+This directory stores files related to hand sign recognition.<br>
+The following files are stored.
+* Training data(keypoint.csv)
+* Trained model(point_history_classifier_LSTM_LR_random_N.tflite): where N is a parameter can be set during the test to pad multiple gestures with maximum length N.
+* Label data(keypoint_classifier_label.csv)
+* Inference module(keypoint_classifier.py)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+### model/point_history_classifier
+This directory stores files related to hand gesture recognition.<br>
+The following files are stored.
+* Training data(./datasets/point_history.csv)
+* Trained model(point_history_classifier.tflite)
+* Label data(point_history_classifier_label.csv)
+* Inference module(point_history_classifier.py)
+
+### images
+This directory stores all the images in this project.
+
+### videos
+This directory stores all the videos in this project.
+
+### utils/cvfpscalc.py
+This is a module for FPS measurement.
 
 
 
-<!-- LICENSE -->
-## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+## Demo
+![A short demo](images/short_demo.gif)
 
 
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Yipeng Lin - yipengli@andrew.cmu.edu
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [hand-gesture-recognition-mediapipe(kinivi)](https://github.com/kinivi/hand-gesture-recognition-mediapipe)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -228,4 +259,4 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [license-url]: https://github.com/Flora9978/CerLab_RealTime_HandGesture_Recognition/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/yipeng-lin/
-[product-screenshot]: images/screenshot.png
+<!-- [product-screenshot]: images/short_demo.gif -->
