@@ -221,7 +221,8 @@ This is a module for FPS measurement.
 ## Demo
 ![A short demo](images/short_demo.gif)
 
-
+## Next Step
+We plan to integrate the glove function into current recognition system. 
 
 <!-- CONTACT -->
 ## Contact
