@@ -253,7 +253,7 @@ The property of out sample glove: lowA = 127, lowB = 127, highA = 137, highB = 1
 <!-- CONTACT -->
 ## Contact
 
-Yipeng Lin - yipengli@andrew.cmu.edu
+Yipeng Lin - yipengli@andrew.cmu.edu <br>
 Xinyang Checn - xinyangc@andrew.cmu.edu
 
 <p align="right">(<a href="#top">back to top</a>)</p>
