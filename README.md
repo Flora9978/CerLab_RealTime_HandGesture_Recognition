@@ -136,6 +136,11 @@ Using a recorded video
 python3 app.py --video <path-to-video>
 ```
 
+Using the glove preprocessor
+```
+python3 app.py --glove 1 --lowA <glove's low bound of A in LAB space> --lowB <glove's low bound of B in LAB space> --highA <glove's high bound of A in LAB space> --highB <glove's hign bound of B in LAB space>
+```
+
 
 ## Directory
 ```
@@ -146,6 +151,11 @@ python3 app.py --video <path-to-video>
 ├── images
 │   └── ...
 ├── keypoint_classification_EN.ipynb
+├── glove_utils
+│   ├── __init__.py
+│   ├── MediapipeDetector.py
+│   ├── OpenCVGloveSolver.py
+│   ├── OpenCVMaskGenerator.py
 ├── model
 │   ├── __init__.py
 │   ├── keypoint_classifier
@@ -189,6 +199,13 @@ This is a model training script for hand pose recognition.
 ### conquer_cross_model.ipynb
 This is a model training script for hand gesture recognition.
 
+### glove_utils/
+This directory stores files related to glove preprocessor and Mediapipe detector.<br>
+The following files are stored.
+* MediaPipe hand detector(MediapipeDetector.py)
+* Mask generator based on glove's color(OpenCVMaskGenerator.py)
+* Glove preprocessor which help MediaPipe detect a hand with glove (OpenCVGloveSolver.py)
+
 ### model/keypoint_classifier
 This directory stores files related to hand sign recognition.<br>
 The following files are stored.
@@ -228,13 +245,11 @@ This directory contains multiple functions to clean the dataset, augment dataset
 ## Demo
 ![A short demo](images/short_demo.gif)
 
-## Next Step
-We plan to integrate the glove function into current recognition system. 
-
 <!-- CONTACT -->
 ## Contact
 
 Yipeng Lin - yipengli@andrew.cmu.edu
+Xinyang Checn - xinyangc@andrew.cmu.edu
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
