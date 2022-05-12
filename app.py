@@ -8,11 +8,12 @@ import itertools
 import pickle as pkl
 from collections import Counter
 from collections import deque
-from charset_normalizer import detect
+
+from glove_utils import HandDetector
+from glove_utils import GloveSolver
 
 import cv2 as cv
 import numpy as np
-import mediapipe as mp
 from utils import hand_gesture_mediapipe
 from utils import CvFpsCalc
 from model import KeyPointClassifier
@@ -43,11 +44,34 @@ def get_args():
     parser.add_argument("--min_detection_confidence",
                         help='min_detection_confidence',
                         type=float,
-                        default=0.7)
+                        default=0.3)
     parser.add_argument("--min_tracking_confidence",
                         help='min_tracking_confidence',
                         type=int,
-                        default=0.75)
+                        default=0.3)
+
+    parser.add_argument("--glove",
+                        help='using glove utils',
+                        type=int,
+                        default=0)
+
+    parser.add_argument("--lowA",
+                        help="the glove' low boundary of A in LAB color space",
+                        type=int,
+                        default=0)
+    parser.add_argument("--lowB",
+                        help="the glove' low boundary of B in LAB color space",
+                        type=int,
+                        default=0)
+    parser.add_argument("--highA",
+                        help="the glove' high boundary of A in LAB color space",
+                        type=int,
+                        default=255)
+    parser.add_argument("--highB",
+                        help="the glove' high boundary of B in LAB color space",
+                        type=int,
+                        default=255)
+
 
     args = parser.parse_args()
 
@@ -61,6 +85,7 @@ def main():
     cap_device = args.device
     cap_width = args.width
     cap_height = args.height
+    glove_switch = args.glove
 
     use_static_image_mode = args.use_static_image_mode
     min_detection_confidence = args.min_detection_confidence
@@ -78,14 +103,15 @@ def main():
         cap.set(cv.CAP_PROP_FRAME_HEIGHT, cap_height)
 
     # Model load #############################################################
-    mp_drawing = mp.solutions.drawing_utils
-    mp_hands = mp.solutions.hands
-    hands = mp_hands.Hands(
-        static_image_mode=use_static_image_mode,
-        max_num_hands=1,
-        min_detection_confidence=min_detection_confidence,
-        min_tracking_confidence=min_tracking_confidence,
-    )
+    keypoint_classifier = KeyPointClassifier()
+    detector = HandDetector(cap_width, cap_height, use_static_image_mode, 1, min_detection_confidence, min_tracking_confidence)
+    low_bound = np.array([0, 0, 0])
+    high_bound = np.array([255, 255, 255])
+    low_bound[1] = args.lowA #127 for video sample
+    low_bound[2] = args.lowB #127 for video sample
+    high_bound[1] = args.highA #137 for video sample
+    high_bound[2] = args.highB #137 for video sample
+    solver = GloveSolver(low_bound, high_bound)
 
     keypoint_classifier = KeyPointClassifier()
 
@@ -106,7 +132,6 @@ def main():
         ]
     with open(
             'model/point_history_classifier/point_history_classifier_label.csv',
-            # 'model/point_history_classifier/point_history_classifier_label_simple3.csv',
             encoding='utf-8-sig') as f:
         point_history_classifier_labels = [
             row[0] for row in csv.reader(f)
@@ -156,10 +181,15 @@ def main():
         debug_image = copy.deepcopy(image)
 
         # Detection implementation #############################################################
-        image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
-
+        img = copy.deepcopy(image)   
+        if glove_switch:              
+            print(low_bound)
+            solver.solver(img, detector)
+        else:
+            detector.findHands(img)
+        
         image.flags.writeable = False
-        results = hands.process(image)
+        results = detector.results
         image.flags.writeable = True
 
         #  ####################################################################
@@ -167,7 +197,7 @@ def main():
             for hand_landmarks, handedness in zip(results.multi_hand_landmarks,
                                                   results.multi_handedness):
                 # add static angle algo here
-                debug_image, static_gesture = hand_gesture_mediapipe.detectWithDynamic(debug_image, hand_landmarks, mp_hands)
+                debug_image, static_gesture = hand_gesture_mediapipe.detectWithDynamic(debug_image, hand_landmarks, detector.mpHands)
                 if static_gesture == 'point':
                     # Bounding box calculation
                     brect = calc_bounding_rect(debug_image, hand_landmarks)
