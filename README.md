@@ -245,6 +245,11 @@ This directory contains multiple functions to clean the dataset, augment dataset
 ## Demo
 ![A short demo](images/short_demo.gif)
 
+## Glove Demo
+The property of out sample glove: lowA = 127, lowB = 127, highA = 137, highB = 137
+![A short demo](images/glove_sample_1.gif)
+![A short demo](images/glove_sample_2.gif)
+
 <!-- CONTACT -->
 ## Contact
 
