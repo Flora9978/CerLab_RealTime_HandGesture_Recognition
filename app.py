@@ -105,7 +105,7 @@ def main():
             row[0] for row in csv.reader(f)
         ]
     with open(
-            'model/point_history_classifier/point_history_classifier_label.csv',
+            'model/point_history_classifier/datasets/point_history_classifier_label.csv',
             # 'model/point_history_classifier/point_history_classifier_label_simple3.csv',
             encoding='utf-8-sig') as f:
         point_history_classifier_labels = [
