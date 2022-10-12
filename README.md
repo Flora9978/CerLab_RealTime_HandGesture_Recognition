@@ -147,8 +147,8 @@ When use the glove preprocessor, you can turn on the show_color_mask mode to sho
 ```
 python3 app.py --glove --show_color_mask --lowA <glove's low bound of A in LAB space> --lowB <glove's low bound of B in LAB space> --highA <glove's high bound of A in LAB space> --highB <glove's hign bound of B in LAB space>
 ```
-(images/colormasktune1.jpg)
-(images/colormasktune2.jpg)
+images/colormasktune1.jpg
+images/colormasktune2.jpg
 ## Directory
 ```
 .
