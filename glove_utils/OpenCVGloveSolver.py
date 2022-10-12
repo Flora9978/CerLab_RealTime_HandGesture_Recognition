@@ -81,8 +81,8 @@ class GloveSolver():
             sample_area = sample_area | temp
         
         sample_area = mask & sample_area.transpose()
-
-        self.buffer[0] =  255 - np.max(lab[sample_area, 0])
+        if lab[sample_area, 0].shape[0] != 0:
+            self.buffer[0] =  255 - np.max(lab[sample_area, 0])
 
 
     def bufferInitialize(self, ABArea, detector):

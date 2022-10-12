@@ -52,8 +52,11 @@ def get_args():
 
     parser.add_argument("--glove",
                         help='using glove utils',
-                        type=int,
-                        default=0)
+                        action='store_true')
+    parser.add_argument("--show_color_mask",
+                        help='show current color mask based on given color range of A and B in LAB color space',
+                        action='store_true')
+
 
     parser.add_argument("--lowA",
                         help="the glove' low boundary of A in LAB color space",
@@ -86,6 +89,7 @@ def main():
     cap_width = args.width
     cap_height = args.height
     glove_switch = args.glove
+    show_color_mask = args.show_color_mask
 
     use_static_image_mode = args.use_static_image_mode
     min_detection_confidence = args.min_detection_confidence
@@ -182,8 +186,10 @@ def main():
 
         # Detection implementation #############################################################
         img = copy.deepcopy(image)   
-        if glove_switch:              
+        if glove_switch:         
             solver.solver(img, detector)
+            if show_color_mask:
+                cv.imshow('Color Mask', solver.maskGenerator.colorMask.astype(np.uint8) * 254)
         else:
             detector.findHands(img)
         
