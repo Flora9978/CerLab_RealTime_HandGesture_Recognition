@@ -152,6 +152,7 @@ An example:
 python3 app.py --glove --show_color_mask --lowA 130  --lowB 120 --highA 145 --highB 130
 ```
 <img src="images/colormasktune1.jpg" width="500" height="403"><img src="images/colormasktune2.jpg" width="500" height="403">
+
 In the right picture, the white area is in the mask. You can tune the lowA, lowB, highA and highB to let the mask include the whole glove. Also, you can try to include background pixels as less as possible, which can improve the accuracy. However, always try to include the whole mask first before you attempt to get rid of the background. Play around with the argument until the system works well with your input. 
 
 ## Directory
