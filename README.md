@@ -116,6 +116,8 @@ You need to install the following python libraries.
 
 ```sh
 pip install tensorflow numpy mediapipe scikit-learn opencv-python pandas seaborn
+mediapipe == 0.8.11
+opencv-python == 4.6.0.66
 ```
 
 ### Optional
