@@ -140,7 +140,7 @@ python3 app.py --video <path-to-video>
 
 Using the glove preprocessor
 ```
-python3 app.py --glove 1 --lowA <glove's low bound of A in LAB space> --lowB <glove's low bound of B in LAB space> --highA <glove's high bound of A in LAB space> --highB <glove's hign bound of B in LAB space>
+python3 app.py --glove --lowA <glove's low bound of A in LAB space> --lowB <glove's low bound of B in LAB space> --highA <glove's high bound of A in LAB space> --highB <glove's hign bound of B in LAB space>
 ```
 
 
