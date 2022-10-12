@@ -104,7 +104,7 @@ def main():
 
     # Model load #############################################################
     keypoint_classifier = KeyPointClassifier()
-    detector = HandDetector(cap_width, cap_height, use_static_image_mode, 1, min_detection_confidence, min_tracking_confidence)
+    detector = HandDetector(cap_width, cap_height, use_static_image_mode, 1, 1, min_detection_confidence, min_tracking_confidence)
     low_bound = np.array([0, 0, 0])
     high_bound = np.array([255, 255, 255])
     low_bound[1] = args.lowA #127 for video sample
@@ -183,7 +183,6 @@ def main():
         # Detection implementation #############################################################
         img = copy.deepcopy(image)   
         if glove_switch:              
-            print(low_bound)
             solver.solver(img, detector)
         else:
             detector.findHands(img)

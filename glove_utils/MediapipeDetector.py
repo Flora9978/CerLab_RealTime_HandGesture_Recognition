@@ -9,17 +9,17 @@ The class of hand detector based on mediapipe
 """
 
 import mediapipe as mp
-import cv2 as cv
 
 class HandDetector():
-    def __init__(self, wid=640, hei=360, mode=False, maxHands=1, detectionCon=0.3, trackCon=0.3):
+    def __init__(self, wid=640, hei=360, mode=False, maxHands=1, model_complexity=1, detectionCon=0.3, trackCon=0.3):
         self.mode = mode# hand tracking mode
         self.maxHands = maxHands# number of hands
+        self.model_complexity = model_complexity# complexity of model
         self.detectionCon = detectionCon# detection confidence(palm detector)
         self.trackCon = trackCon# tracking confidence(landmark model)
 
         self.mpHands = mp.solutions.hands# hand tracking solution
-        self.hands = self.mpHands.Hands(self.mode, self.maxHands, self.detectionCon, self.trackCon)
+        self.hands = self.mpHands.Hands(self.mode, self.maxHands, self.model_complexity, self.detectionCon, self.trackCon)
         self.mpDraw = mp.solutions.drawing_utils# draw
         self.wid = wid # width of the input image
         self.hei = hei # height of the input image

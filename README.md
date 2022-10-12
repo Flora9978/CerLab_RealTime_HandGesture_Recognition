@@ -249,7 +249,7 @@ This directory contains multiple functions to clean the dataset, augment dataset
 ## Contact
 
 Yipeng Lin - yipengli@andrew.cmu.edu
-Xinyang Checn - xinyangc@andrew.cmu.edu
+Xinyang Chen - xinyangc@andrew.cmu.edu
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
