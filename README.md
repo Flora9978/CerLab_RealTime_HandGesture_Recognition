@@ -256,7 +256,7 @@ This directory contains multiple functions to clean the dataset, augment dataset
 
 
 ## Demo
-![A short demo](images/short_demo.gif)
+![A short demo](images/gloves_sample1.gif)
 
 <!-- CONTACT -->
 ## Contact
